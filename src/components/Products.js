@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 export default function Products() {
   const courses = [
     {
@@ -7,9 +7,10 @@ export default function Products() {
       name: "python course",
       description: "Best damn python course",
       rate: 4
-    },
-    
+    },  
   ];
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Header>Ambitious</Header>
@@ -27,7 +28,7 @@ export default function Products() {
       <Menu>
         <ion-icon name="home"></ion-icon>
         <ion-icon name="cart-sharp"></ion-icon>
-        <ion-icon name="person-sharp"></ion-icon>
+        <ion-icon onClick={() => navigate("/login")} name="person-sharp"></ion-icon>
       </Menu>
     </Container>
   );
