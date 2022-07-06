@@ -28,7 +28,7 @@ export default function Products() {
       <Menu>
         <ion-icon name="home"></ion-icon>
         <ion-icon name="cart-sharp"></ion-icon>
-        <ion-icon onClick={() => navigate("/login")} name="person-sharp"></ion-icon>
+        <ion-icon onClick={() => navigate("/cadastro")} name="person-sharp"></ion-icon>
       </Menu>
     </Container>
   );
