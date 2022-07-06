@@ -32,7 +32,7 @@ export default function Products() {
     },
   ];
 
-  console.log(rating);
+  console.log(rating,courses);
 
   return (
     <Container>
@@ -88,6 +88,7 @@ const Header = styled.header`
   position: fixed;
   top: 0;
   color: #ff9900;
+  z-index:1;
 `;
 
 const Shelf = styled.div`
