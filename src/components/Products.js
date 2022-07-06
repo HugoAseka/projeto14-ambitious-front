@@ -1,5 +1,5 @@
 
 
 export default function Products(){
-    return(<div>PRODUTOS</div>)
+    return(<div>PRODUTOS NOVA BRANCH</div>)
 }
