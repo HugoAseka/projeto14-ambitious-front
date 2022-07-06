@@ -25,7 +25,7 @@ export default function LoginScreen(){
         }
         console.log(process.env.API_URI);
 
-        const promise=axios.post(`https://api-mywallet-klaus.herokuapp.com/login`,postLogin);
+        const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");
