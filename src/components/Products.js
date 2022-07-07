@@ -1,38 +1,33 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 export default function Products() {
   const navigate = useNavigate();
+  const [display, setDisplay] = useState(false);  
+  const user  = JSON.parse(localStorage.getItem("user"));
 
-  const [rating, setRating] = useState([0, 0, 0]);
-  const handleRating = (rate, index) => {
-    rating[index] = rate;
-    setRating([...rating]);
-  };
   const courses = [
     {
       img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
       name: "python course",
       description: "Best damn python course there is",
-      rate: rating[0],
+      rate: 60,
     },
     {
       img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
       name: "python course",
       description: "Best damn python course there is",
-      rate: rating[1],
+      rate: 100,
     },
     {
       img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
       name: "python course",
       description: "Best damn python course there is",
-      rate: rating[2],
+      rate: 40,
     },
   ];
-
-  console.log(rating);
 
   return (
     <Container>
@@ -44,23 +39,24 @@ export default function Products() {
               <img src={el.img} />
               <h3>{el.name}</h3>
               <p>{el.description}</p>
-              {rating.length !== 0 ? (
-                <Rating
-                  onClick={() => handleRating(rating[index], index)}
-                  ratingValue={rating[index]}
-                />
-              ) : (
-                " "
-              )}
+              <div>
+                <Rating readonly size={20} ratingValue={el.rate} />
+                <button>Comprar</button>
+              </div>
             </Item>
           );
         })}
       </Shelf>
+      <SideBar display={display}>
+
+        <h3>{ user ? user.name : ""}</h3>
+
+      </SideBar>
       <Menu>
         <ion-icon name="home"></ion-icon>
         <ion-icon name="cart-sharp"></ion-icon>
         <ion-icon
-          onClick={() => navigate("/cadastro")}
+          onClick={() => setDisplay(!display)}
           name="person-sharp"
         ></ion-icon>
       </Menu>
@@ -73,6 +69,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  scrollbar-color: #fafafa;
 `;
 
 const Header = styled.header`
@@ -88,6 +85,7 @@ const Header = styled.header`
   position: fixed;
   top: 0;
   color: #ff9900;
+  z-index: 1;
 `;
 
 const Shelf = styled.div`
@@ -95,13 +93,35 @@ const Shelf = styled.div`
   min-height: 80vh;
   width: 100%;
   max-width: 612px;
-  margin: 10vh 0;
-`;
-const Item = styled.div`
+  margin: 10vh 0 8vh 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+const Item = styled.div`
+  width: 94%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 4px;
+  border-style: solid;
+  border-color: #a9a9a9;
+  padding: 20px 0;
+  gap: 6px;
   img {
     border-radius: 4px;
+    height: 200px;
+    object-fit: cover;
+    width: 90%;
+  }
+  h3 {
+    font-weight: 700;
+  }
+  div{
+    display:flex;
+    justify-content:space-around;
+    width: 80%;
   }
 `;
 
@@ -119,4 +139,24 @@ const Menu = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
+`;
+
+const SideBar = styled.div`
+    background-color:  	 	#808080;
+    position:fixed;
+    right: 0;
+    top: 0vh;
+    width: 300px;
+    height: 90vh;
+    z-index:2;
+    border-radius: 10px 0 0 10px;
+    display: ${({display}) => display ? "flex" : "none"};
+    padding: 6%;
+    
+    h3 {
+        color: white;
+        font-size: 40px;
+        font-family: 'Ubuntu Mono', monospace;
+    }
+
 `;
