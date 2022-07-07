@@ -6,9 +6,10 @@ import { useState } from "react";
 import Products from "./Products";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import ShoppingCart from "./ShopppingCart";
 
 export default function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
   const [user, setUser] = useState({});
 
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
+          <Route path="/carrinho" element={<ShoppingCart/>} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

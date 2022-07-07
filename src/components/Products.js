@@ -58,7 +58,10 @@ export default function Products() {
       </Shelf>
       <Menu>
         <ion-icon name="home"></ion-icon>
-        <ion-icon name="cart-sharp"></ion-icon>
+        <ion-icon 
+        name="cart-sharp"
+        onClick={() => navigate("/carrinho")}
+        ></ion-icon>
         <ion-icon
           onClick={() => navigate("/cadastro")}
           name="person-sharp"
