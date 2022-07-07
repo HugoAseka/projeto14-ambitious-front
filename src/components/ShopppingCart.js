@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
-export default function Products() {
+export default function ShoppingCart() {
   const navigate = useNavigate();
 
   const [rating, setRating] = useState([0, 0, 0]);
@@ -32,8 +32,6 @@ export default function Products() {
     },
   ];
 
-  console.log(rating);
-
   return (
     <Container>
       <Header>Ambitious</Header>
@@ -50,7 +48,7 @@ export default function Products() {
                   ratingValue={rating[index]}
                 />
               ) : (
-                " "
+                "Loading ... "
               )}
             </Item>
           );
@@ -97,6 +95,7 @@ const Shelf = styled.div`
   max-width: 612px;
   margin: 10vh 0;
 `;
+
 const Item = styled.div`
   display: flex;
   flex-direction: column;
