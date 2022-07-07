@@ -8,13 +8,36 @@ export default function Products() {
   const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([
+    {
+      img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
+      name: "python course",
+      description: "Best damn python course there is",
+      rate: 60,
+      price: 90,
+    },
+    {
+      img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
+      name: "python course",
+      description: "Best damn python course there is",
+      rate: 100,
+      price: 70,
+    },
+    {
+      img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
+      name: "python course",
+      description: "Best damn python course there is",
+      rate: 40,
+      price: 30,
+    },
+  ]);
 
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/cursos");
+    const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
 
     promise
       .then((res) => {
+        setCourses([]);
         setCourses([...res.data]);
       })
       .catch((error) => console.log("deu ruim", error));
