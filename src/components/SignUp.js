@@ -80,7 +80,7 @@ const Container=styled.div`
         text-align: center;
         text-decoration: none;
 
-        color: #FFFFFF;
+        color: black;
     }
 `
 const Form = styled.form`
