@@ -23,7 +23,7 @@ export default function LoginScreen(){
             email,
             password
         }
-        console.log(process.env.API_URI);
+      
 
         const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
 

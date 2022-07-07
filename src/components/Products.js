@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 export default function Products() {
@@ -32,7 +32,7 @@ export default function Products() {
     },
   ];
 
-  console.log(rating,courses);
+  useEffect(() => {console.log(rating)}, [rating]);
 
   return (
     <Container>

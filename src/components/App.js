@@ -1,7 +1,7 @@
 import ResetCSS from "../assets/ResetCSS";
 import GlobalStyle from "../assets/GlobalStyle";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../context/UserContext";
 import { useState } from "react";
 import Products from "./Products";
 import Login from "./Login";
