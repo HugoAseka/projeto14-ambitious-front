@@ -74,7 +74,10 @@ export default function Products() {
       </SideBar>
       <Menu>
         <ion-icon name="home"></ion-icon>
-        <ion-icon name="cart-sharp"></ion-icon>
+        <ion-icon 
+        name="cart-sharp"
+        onClick={() => navigate("/carrinho")}
+        ></ion-icon>
         <ion-icon
           onClick={() => setDisplay(!display)}
           name="person-sharp"
