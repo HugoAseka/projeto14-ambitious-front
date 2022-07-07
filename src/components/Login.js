@@ -23,7 +23,6 @@ export default function LoginScreen(){
             email,
             password
         }
-      
 
         const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
 
@@ -38,7 +37,7 @@ export default function LoginScreen(){
                     token: resposta.data.token,
                 },
             );
-            navigate("/principal");
+            navigate("/");
         });
     }
     
@@ -90,7 +89,7 @@ const Container=styled.div`
         text-align: center;
         text-decoration: none;
 
-        color: #FFFFFF;
+        color: black;
     }
 
 `
