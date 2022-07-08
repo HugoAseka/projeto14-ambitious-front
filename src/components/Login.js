@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import {React, useContext, useState } from 'react';
 import UserContext from "../context/UserContext";
 import { ThreeDots } from  'react-loader-spinner';
+import dotenv from 'dotenv';
 
-
+dotenv.config();
 export default function LoginScreen(){
     
     const [email, setEmail]=useState("");
@@ -24,7 +25,7 @@ export default function LoginScreen(){
             password
         }
 
-        const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
+        const promise=axios.post(`${process.env.BACK}/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");

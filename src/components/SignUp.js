@@ -25,7 +25,7 @@ export default function SignUp() {
             owned:[]
         };
     
-    const promise=axios.post(`https://ambitious-api.herokuapp.com/cadastrar`,postObject);
+    const promise=axios.post(`${process.env.BACK}/cadastrar`,postObject);
 
     promise.then(resposta => {
         setEmail("");

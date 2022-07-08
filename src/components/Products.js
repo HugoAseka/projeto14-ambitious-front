@@ -33,7 +33,7 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
+    const promise = axios.get(`${process.env.BACK}/cursos`);
 
     promise
       .then((res) => {
@@ -56,7 +56,7 @@ export default function Products() {
 
     if(user){
 
-      const promise = axios.post("https://ambitious-api.herokuapp.com/carrinho",id,config);
+      const promise = axios.post(`${process.env.BACK}/carrinho`,id,config);
 
       promise.then((res) => {
         console.log(res)
