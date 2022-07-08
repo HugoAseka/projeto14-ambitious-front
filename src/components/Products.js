@@ -32,8 +32,6 @@ export default function Products() {
     },
   ];
 
-  console.log(rating);
-
   return (
     <Container>
       <Header>Ambitious</Header>
