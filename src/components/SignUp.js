@@ -20,7 +20,9 @@ export default function SignUp() {
             email ,
             password,
             name,
-            passwordConfirmation
+            passwordConfirmation,
+            cart:[],
+            owned:[]
         };
     
     const promise=axios.post(`https://ambitious-api.herokuapp.com/cadastrar`,postObject);

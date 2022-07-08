@@ -35,6 +35,8 @@ export default function LoginScreen(){
                 {   
                     name: resposta.data.name,
                     token: resposta.data.token,
+                    cart: resposta.data.cart,
+                    owned:resposta.data.owned
                 },
             );
             //armazenando resposta.data no localStorage
