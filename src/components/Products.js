@@ -8,6 +8,7 @@ export default function Products() {
   const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+
   const [courses, setCourses] = useState([
     {
       img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
@@ -39,34 +40,38 @@ export default function Products() {
       .then((res) => {
         setCourses([]);
         setCourses([...res.data]);
+        console.log(res.data);
       })
       .catch((error) => console.log("deu ruim", error));
   }, []);
-  const productCart="";
 
-  function addToCart(id){
-
-    const {token} = user;
+  function addToCart(id) {
+    const { token } = user;
 
     const config = {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
-    if(user){
+    if (user) {
+        // const promise = axios.post(
+        //   "https://ambitious-api.herokuapp.com/carrinho",
+        //   id,
+        //   config
+        // );
 
       const promise = axios.post(`${process.env.BACK}/carrinho`,id,config);
 
-      promise.then((res) => {
-        console.log(res)
-        navigate("/carrinho");
-      }).catch((error) => console.log("deu ruim", error));
-      
-    }else{
+      promise
+        .then((res) => {
+          console.log(res);
+          navigate("/carrinho");
+        })
+        .catch((error) => console.log("deu ruim", error));
+    } else {
       navigate("/login");
     }
-    
   }
 
   return (
@@ -79,10 +84,11 @@ export default function Products() {
               <img src={el.img} />
               <h3>{el.name}</h3>
               <p>{el.description}</p>
-              <span>R${el.price}.00</span>
+
               <div>
                 <Rating readonly size={20} ratingValue={el.rate} />
-                <button onClick={() =>addToCart(el._id)}>Comprar</button>
+                <span>R${el.price}.00</span>
+                <button onClick={() => addToCart(el._id)}>Comprar</button>
               </div>
             </Item>
           );
@@ -100,9 +106,9 @@ export default function Products() {
       </SideBar>
       <Menu>
         <ion-icon name="home"></ion-icon>
-        <ion-icon 
-        name="cart-sharp"
-        onClick={() => navigate("/carrinho")}
+        <ion-icon
+          name="cart-sharp"
+          onClick={() => navigate("/carrinho")}
         ></ion-icon>
         <ion-icon
           onClick={() => setDisplay(!display)}
@@ -122,8 +128,8 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  background-color: #dcdcdc;
-  max-width: 612px;
+  background-color: #000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 0px 0px 8px 8px;
@@ -135,8 +141,9 @@ const Header = styled.header`
   top: 0;
   color: #ff9900;
   z-index: 1;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Libre Barcode 128 Text", cursive;
   font-weight: 700;
+  font-size: 60px;
 `;
 
 const Shelf = styled.div`
@@ -148,7 +155,7 @@ const Shelf = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 const Item = styled.div`
   width: 94%;
@@ -157,14 +164,15 @@ const Item = styled.div`
   align-items: center;
   border-bottom: 4px;
   border-style: solid;
-  border-color: #a9a9a9;
+  border-color: #000000;
   padding: 20px 0;
-  gap: 6px;
+  gap: 18px;
   img {
+    margin-right: 20px;
+    max-width: 412px;
+    max-height: 220px;
     border-radius: 4px;
-    height: 200px;
-    object-fit: cover;
-    width: 90%;
+    margin: 5px;
   }
   h3 {
     font-weight: 700;
@@ -177,8 +185,8 @@ const Item = styled.div`
 `;
 
 const Menu = styled.footer`
-  background-color: #dcdcdc;
-  max-width: 612px;
+  background-color: #000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 8px 8px 0px 0px;
@@ -190,12 +198,13 @@ const Menu = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
+  color: #ff9900;
 `;
 
 const SideBar = styled.div`
-  background-color: #808080;
+  background-color: lightblue;
   position: fixed;
-  left: 50%;
+  right: 0;
   top: 0vh;
   width: 300px;
   height: 90vh;
