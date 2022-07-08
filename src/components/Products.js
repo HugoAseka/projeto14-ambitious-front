@@ -96,8 +96,8 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  background-color: #dcdcdc;
-  max-width: 612px;
+  background-color:  	#000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 0px 0px 8px 8px;
@@ -131,14 +131,15 @@ const Item = styled.div`
   align-items: center;
   border-bottom: 4px;
   border-style: solid;
-  border-color: #a9a9a9;
+  border-color: #000000;
   padding: 20px 0;
   gap: 6px;
   img {
+    margin-right: 20px;
+    max-width: 412px;
+    max-height: 220px;
     border-radius: 4px;
-    height: 200px;
-    object-fit: cover;
-    width: 90%;
+    margin: 5px;
   }
   h3 {
     font-weight: 700;
@@ -151,8 +152,8 @@ const Item = styled.div`
 `;
 
 const Menu = styled.footer`
-  background-color: #dcdcdc;
-  max-width: 612px;
+  background-color: #000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 8px 8px 0px 0px;
@@ -164,12 +165,13 @@ const Menu = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
+  color:#ff9900;
 `;
 
 const SideBar = styled.div`
-  background-color: #808080;
+  background-color: white;
   position: fixed;
-  left: 50%;
+  right: 0;
   top: 0vh;
   width: 300px;
   height: 90vh;

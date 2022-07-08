@@ -6,7 +6,7 @@ import { useState } from "react";
 import Products from "./Products";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import ShoppingCart from "./ShopppingCart";
+import ShoppingCart from "./ShoppingCart";
 
 export default function App() {
   const [cart, setCart] = useState({});
