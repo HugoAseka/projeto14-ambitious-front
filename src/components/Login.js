@@ -24,9 +24,9 @@ export default function LoginScreen(){
             password
         }
 
-        // const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
+        const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
 
-        const promise = axios.post("http://localhost:5000/login", postLogin);
+        // const promise = axios.post("http://localhost:5000/login", postLogin);
 
         promise.then(resposta => {
             setEmail("");
