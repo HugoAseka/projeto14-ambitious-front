@@ -39,6 +39,10 @@ export default function LoginScreen(){
                     owned:resposta.data.owned
                 },
             );
+            //armazenando resposta.data no localStorage
+            const userString = JSON.stringify(resposta.data); 
+            localStorage.removeItem("user");
+            localStorage.setItem("user", userString);
             navigate("/");
         });
     }
