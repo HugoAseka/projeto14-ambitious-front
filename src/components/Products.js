@@ -34,8 +34,8 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    // const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
-    const promise = axios.get("http://localhost:5000/cursos");
+    const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
+    // const promise = axios.get("http://localhost:5000/cursos");
 
     promise
       .then((res) => {
@@ -45,13 +45,20 @@ export default function Products() {
       .catch((error) => console.log("deu ruim", error));
   }, []);
 
-  const productCart = "";
-
   function addToCart(id) {
+    const { token } = user;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     if (user) {
       const promise = axios.post(
         "https://ambitious-api.herokuapp.com/carrinho",
-        id
+        id,
+        config
       );
 
       promise
@@ -60,8 +67,9 @@ export default function Products() {
           navigate("/carrinho");
         })
         .catch((error) => console.log("deu ruim", error));
+    } else {
+      navigate("/login");
     }
-    navigate("/login");
   }
 
   return (
