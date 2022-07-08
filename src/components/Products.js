@@ -45,16 +45,28 @@ export default function Products() {
   const productCart="";
 
   function addToCart(id){
+
+    const {token} = user;
+
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+    };
+
     if(user){
-      const promise = axios.post("https://ambitious-api.herokuapp.com/carrinho",id);
+
+      const promise = axios.post("https://ambitious-api.herokuapp.com/carrinho",id,config);
 
       promise.then((res) => {
         console.log(res)
         navigate("/carrinho");
       }).catch((error) => console.log("deu ruim", error));
       
+    }else{
+      navigate("/login");
     }
-    navigate("/login");
+    
   }
 
   return (
