@@ -34,13 +34,14 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
-    // const promise = axios.get("http://localhost:5000/cursos");
+    // const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
+    const promise = axios.get("http://localhost:5000/cursos");
 
     promise
       .then((res) => {
         setCourses([]);
         setCourses([...res.data]);
+        console.log(res.data);
       })
       .catch((error) => console.log("deu ruim", error));
   }, []);
@@ -200,7 +201,7 @@ const Menu = styled.footer`
 `;
 
 const SideBar = styled.div`
-  background-color: white;
+  background-color: lightblue;
   position: fixed;
   right: 0;
   top: 0vh;
