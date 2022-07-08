@@ -8,6 +8,7 @@ export default function Products() {
   const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+
   const [courses, setCourses] = useState([
     {
       img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
@@ -33,7 +34,8 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
+    // const promise = axios.get("https://ambitious-api.herokuapp.com/cursos");
+    const promise = axios.get("http://localhost:5000/cursos");
 
     promise
       .then((res) => {
@@ -42,17 +44,22 @@ export default function Products() {
       })
       .catch((error) => console.log("deu ruim", error));
   }, []);
-  const productCart="";
 
-  function addToCart(id){
-    if(user){
-      const promise = axios.post("https://ambitious-api.herokuapp.com/carrinho",id);
+  const productCart = "";
 
-      promise.then((res) => {
-        console.log(res)
-        navigate("/carrinho");
-      }).catch((error) => console.log("deu ruim", error));
-      
+  function addToCart(id) {
+    if (user) {
+      const promise = axios.post(
+        "https://ambitious-api.herokuapp.com/carrinho",
+        id
+      );
+
+      promise
+        .then((res) => {
+          console.log(res);
+          navigate("/carrinho");
+        })
+        .catch((error) => console.log("deu ruim", error));
     }
     navigate("/login");
   }
@@ -67,10 +74,11 @@ export default function Products() {
               <img src={el.img} />
               <h3>{el.name}</h3>
               <p>{el.description}</p>
-              <span>R${el.price}.00</span>
+
               <div>
                 <Rating readonly size={20} ratingValue={el.rate} />
-                <button onClick={() =>addToCart(el._id)}>Comprar</button>
+                <span>R${el.price}.00</span>
+                <button onClick={() => addToCart(el._id)}>Comprar</button>
               </div>
             </Item>
           );
@@ -88,9 +96,9 @@ export default function Products() {
       </SideBar>
       <Menu>
         <ion-icon name="home"></ion-icon>
-        <ion-icon 
-        name="cart-sharp"
-        onClick={() => navigate("/carrinho")}
+        <ion-icon
+          name="cart-sharp"
+          onClick={() => navigate("/carrinho")}
         ></ion-icon>
         <ion-icon
           onClick={() => setDisplay(!display)}
@@ -110,7 +118,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  background-color:  	#000000;
+  background-color: #000000;
   /* max-width: 612px; */
   width: 100%;
   height: 10vh;
@@ -123,8 +131,9 @@ const Header = styled.header`
   top: 0;
   color: #ff9900;
   z-index: 1;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Libre Barcode 128 Text", cursive;
   font-weight: 700;
+  font-size: 60px;
 `;
 
 const Shelf = styled.div`
@@ -136,7 +145,7 @@ const Shelf = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 const Item = styled.div`
   width: 94%;
@@ -147,7 +156,7 @@ const Item = styled.div`
   border-style: solid;
   border-color: #000000;
   padding: 20px 0;
-  gap: 6px;
+  gap: 18px;
   img {
     margin-right: 20px;
     max-width: 412px;
@@ -179,7 +188,7 @@ const Menu = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
-  color:#ff9900;
+  color: #ff9900;
 `;
 
 const SideBar = styled.div`
