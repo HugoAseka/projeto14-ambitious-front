@@ -5,7 +5,8 @@ import axios from "axios";
 
 export default function ShoppingCart() {
   const navigate = useNavigate();
-
+  const [display, setDisplay] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
   const items = [
     {
       img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
@@ -81,11 +82,21 @@ export default function ShoppingCart() {
           </Column>
         </Button>
       </Row>
+      <SideBar display={display}>
+        {user ? (
+          <h3>{user.name}</h3>
+        ) : (
+          <div>
+            <p onClick={() => navigate("/cadastro")}>Cadastrar</p>
+            <p onClick={() => navigate("/login")}>Login</p>
+          </div>
+        )}
+      </SideBar>
       <Menu>
         <ion-icon onClick={() => navigate("/")} name="home"></ion-icon>
         <ion-icon name="cart-sharp"></ion-icon>
         <ion-icon
-          onClick={() => navigate("/cadastro")}
+          onClick={() => setDisplay(!display)}
           name="person-sharp"
         ></ion-icon>
       </Menu>
@@ -183,8 +194,10 @@ const Register = styled.div`
   border-radius: 5px;
   padding-bottom: 10px;
 `;
+
 const Header = styled.header`
-  background-color: #dcdcdc;
+  background-color: #000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 0px 0px 8px 8px;
@@ -194,17 +207,16 @@ const Header = styled.header`
   font-size: 40px;
   position: fixed;
   top: 0;
-  font-family: "Saira Stencil One";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 50px;
-  margin-bottom: 35px;
   color: #ff9900;
+  z-index: 1;
+  font-family: "Libre Barcode 128 Text", cursive;
+  font-weight: 700;
+  font-size: 60px;
 `;
 
 const Menu = styled.footer`
-  background-color: #dcdcdc;
+  background-color: #000000;
+  /* max-width: 612px; */
   width: 100%;
   height: 10vh;
   border-radius: 8px 8px 0px 0px;
@@ -216,4 +228,24 @@ const Menu = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
+  color: #ff9900;
+`;
+
+const SideBar = styled.div`
+  background-color: lightblue;
+  position: fixed;
+  right: 0;
+  top: 0vh;
+  width: 300px;
+  height: 90vh;
+  z-index: 2;
+  border-radius: 10px 0 0 10px;
+  display: ${({ display }) => (display ? "flex" : "none")};
+  padding: 6%;
+
+  h3 {
+    color: white;
+    font-size: 40px;
+    font-family: "Ubuntu Mono", monospace;
+  }
 `;
