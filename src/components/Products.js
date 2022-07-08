@@ -84,7 +84,7 @@ export default function Products() {
               <p>{el.description}</p>
 
               <div>
-                <Rating readonly size={20} ratingValue={el.rate} />
+                <Rating readonly size={30} ratingValue={el.rate} />
                 <span>R${el.price}.00</span>
                 <button onClick={() => addToCart(el._id)}>Comprar</button>
               </div>
@@ -179,6 +179,18 @@ const Item = styled.div`
     display: flex;
     justify-content: space-around;
     width: 80%;
+  }
+  button {
+    background-color: #ff9900;
+    border: none;
+    border-radius: 4px;
+    width: 80px;
+    height: 30px;
+  }
+  span{
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
   }
 `;
 

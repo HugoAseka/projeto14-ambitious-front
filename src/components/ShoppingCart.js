@@ -41,7 +41,7 @@ export default function ShoppingCart() {
 
   return (
     <Container>
-      <Header>Meu Carrinho</Header>
+      <Header>Ambitious</Header>
       <Register>
         {items.length > 0 ? (
           <>
