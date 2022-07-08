@@ -55,12 +55,6 @@ export default function Products() {
     };
 
     if (user) {
-        // const promise = axios.post(
-        //   "https://ambitious-api.herokuapp.com/carrinho",
-        //   id,
-        //   config
-        // );
-
       const promise = axios.post(`${process.env.BACK}/carrinho`,id,config);
 
       promise
