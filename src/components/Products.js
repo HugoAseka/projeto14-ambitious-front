@@ -34,7 +34,7 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-   // const promise = axios.get(`http://localhost:5000/cursos`);
+//    const promise = axios.get(`http://localhost:5000/cursos`);
      const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
     promise
       .then((res) => {
@@ -56,13 +56,13 @@ export default function Products() {
 
     if (user) {
 
-        const promise = axios.post(`http://localhost:5000/carrinho`,course,config);
+        // const promise = axios.post(`http://localhost:5000/carrinho`,course,config);
 
-    //   const promise = axios.post(
-    //     `https://ambitious-api.herokuapp.com/carrinho`,
-    //     course,
-    //     config
-    //   );
+      const promise = axios.post(
+        `https://ambitious-api.herokuapp.com/carrinho`,
+        course,
+        config
+      );
 
       promise
         .then((res) => {

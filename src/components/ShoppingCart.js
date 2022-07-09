@@ -8,6 +8,7 @@ export default function ShoppingCart() {
   dotenv.config();
   const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
+  const [checkoutScreen, setCheckoutScreen] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [courses, setCourses] = useState([
@@ -28,8 +29,8 @@ export default function ShoppingCart() {
         Authorization: `Bearer ${token}`,
       },
     };
-    // const promise = axios.get(`https://ambitious-api.herokuapp.com/carrinho`,config);
-    const promise = axios.get(`http://localhost:5000/carrinho`, config);
+    const promise = axios.get(`https://ambitious-api.herokuapp.com/carrinho`,config);
+    // const promise = axios.get(`http://localhost:5000/carrinho`, config);
     promise
       .then((res) => {
         console.log(res.data);
@@ -38,6 +39,24 @@ export default function ShoppingCart() {
       })
       .catch((error) => console.log("deu ruim", error));
   }, []);
+
+  function checkout() {
+    const { token } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const promise = axios.get(`https://ambitious-api.herokuapp.com/checkout`,null,config);
+    // const promise = axios.post(`http://localhost:5000/checkout`,null, config);
+
+    promise
+      .then((res) => {
+        console.log(res.data);
+        navigate("/");
+      })
+      .catch((error) => console.log("checkout erro", error));
+  }
 
   let total = 0;
   calcTotal();
@@ -84,7 +103,7 @@ export default function ShoppingCart() {
             <Text>Continuar comprando</Text>
           </Column>
         </Button>
-        <Button onClick={() => navigate("/")}>
+        <Button onClick={() => setCheckoutScreen(!checkoutScreen)}>
           <Column>
             <Text>Finalizar compra</Text>
           </Column>
@@ -100,8 +119,32 @@ export default function ShoppingCart() {
           </div>
         )}
       </SideBar>
+      <Checkout checkoutScreen={checkoutScreen}>
+        {courses.map((item, index) => (
+          <ContainerCheckout>
+            <CheckoutItem key={index}>
+              <strong> {item.name} </strong>
+
+              {item.description}
+            </CheckoutItem>
+            <h3>R$ {item.price}</h3>
+          </ContainerCheckout>
+        ))}
+        <Confirm>
+          <strong>TOTAL</strong>
+          <strong>R$ {total}</strong>
+        </Confirm>
+        <Cont>
+          <Button onClick={checkout}>Finalizar</Button>
+          <Button onClick={() => setCheckoutScreen(!checkoutScreen)}>
+            Cancelar
+          </Button>
+        </Cont>
+      </Checkout>
       <Menu>
-        <ion-icon onClick={() => navigate("/")} name="home"></ion-icon>
+        <ion-icon onClick={() => navigate("/")} name="home">
+          {" "}
+        </ion-icon>
         <ion-icon name="cart-sharp"></ion-icon>
         <ion-icon
           onClick={() => setDisplay(!display)}
@@ -256,4 +299,78 @@ const SideBar = styled.div`
     font-size: 40px;
     font-family: "Ubuntu Mono", monospace;
   }
+`;
+
+const Checkout = styled.div`
+  display: ${({ checkoutScreen }) => (checkoutScreen ? "flex" : "none")};
+  height: 800px;
+  width: 600px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-300px, -400px);
+  background-color: #708090;
+  z-index: 2;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+`;
+
+const CheckoutItem = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  gap: 10px;
+  img {
+    margin-right: 20px;
+    max-width: 140px;
+    max-height: 70px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  h2 {
+    margin-left: 8px;
+  }
+`;
+
+const ContainerCheckout = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  width: 500px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: left;
+  border-bottom: 1px solid black;
+  height: 150px;
+  strong {
+    font-weight: bold;
+    font-size: 20px;
+  }
+`;
+
+const Confirm = styled.div`
+  width: 500px;
+  display: flex;
+  justify-content: space-around;
+  height: 40px;
+  margin: 20px 0;
+  align-items: center;
+  font-weight: 700;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: black;
+  color: #ff9900;
+  font-size: 20px;
+`;
+const Cont = styled.div`
+  display: flex;
 `;
