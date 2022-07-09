@@ -30,11 +30,11 @@ export default function Products() {
       description: "Best damn python course there is",
       rate: 40,
       price: 30,
-    },
+    }
   ]);
 
   useEffect(() => {
-    const promise = axios.get(`${process.env.BACK}/cursos`);
+    const promise = axios.get(`${process.env.API}/cursos`);
 
     promise
       .then((res) => {
@@ -55,7 +55,7 @@ export default function Products() {
     };
 
     if (user) {
-      const promise = axios.post(`${process.env.BACK}/carrinho`,id,config);
+      const promise = axios.post(`${process.env.API}/carrinho`,id,config);
 
       promise
         .then((res) => {
@@ -82,7 +82,7 @@ export default function Products() {
               <div>
                 <Rating readonly size={20} ratingValue={el.rate} />
                 <span>R${el.price}.00</span>
-                <button onClick={() => addToCart(el._id)}>Comprar</button>
+                <button onClick={() => addToCart(el)}>Comprar</button>
               </div>
             </Item>
           );

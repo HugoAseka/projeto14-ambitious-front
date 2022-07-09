@@ -1,41 +1,53 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { React, useEffect, useState, useContext } from "react";
+import { React, useEffect, useState} from "react";
 import axios from "axios";
+import dotenv from 'dotenv';
+
 
 export default function ShoppingCart() {
+  dotenv.config();
   const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  const items = [
+
+  const [courses, setCourses] = useState([
     {
-      img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
-      name: "Python course",
-      description: "Best damn python course there is",
-      rate: "",
-      price: "50",
+      img: "https://smlc.dev/static/media/course-photo.6f1b6e63.png",
+      name: "Your cart is empty",
+      description: "",
+      rate: 0,
+      price: 0,
     },
-    {
-      img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
-      name: "React course",
-      description: "Best damn react course there is",
-      rate: "",
-      price: "60",
-    },
-    {
-      img: "https://eucontador.com.br/wp-content/uploads/2019/10/Como-abrir-empresa-de-Cursos-Online.png",
-      name: "Javascript course",
-      description: "Best damn js course there is",
-      rate: "",
-      price: "70",
-    },
-  ];
+  ]);
+
+
+  useEffect(() => {
+    const { token } = user;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const promise = axios.get(`${process.env.API}/carrinho`,config);
+    
+    promise
+      .then((res) => {
+        console.log(res.data);
+        setCourses([]);
+        setCourses([...res.data]);
+        
+      })
+      .catch((error) => console.log("deu ruim", error));
+  }, []);
+
 
   let total = 0;
   calcTotal();
   function calcTotal() {
-    for (let i = 0; i < items.length; i++) {
-      total += Number(items[i].price.replace(",", "."));
+    for (let i = 0; i < courses.length; i++) {
+      total += Number(courses[i].price);
     }
   }
 
@@ -43,10 +55,10 @@ export default function ShoppingCart() {
     <Container>
       <Header>Meu Carrinho</Header>
       <Register>
-        {items.length > 0 ? (
+        {courses.length > 0 ? (
           <>
             <Column>
-              {items.map((item, index) => (
+              {courses.map((item, index) => (
                 <ContainerProduct key={index}>
                   <Row>
                     <img src={item.img}></img> <strong> {item.name} </strong>

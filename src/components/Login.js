@@ -6,9 +6,8 @@ import UserContext from "../context/UserContext";
 import { ThreeDots } from  'react-loader-spinner';
 import dotenv from 'dotenv';
 
-dotenv.config();
 export default function LoginScreen(){
-    
+    dotenv.config();
     const [email, setEmail]=useState("");
     const [password,setPassword]=useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +24,7 @@ export default function LoginScreen(){
             password
         }
 
-        const promise=axios.post(`${process.env.BACK}/login`,postLogin);
+        const promise=axios.post(`${process.env.API}/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");
