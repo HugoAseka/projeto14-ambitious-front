@@ -45,7 +45,7 @@ export default function Products() {
       .catch((error) => console.log("deu ruim", error));
   }, []);
 
-  function addToCart(id) {
+  function addToCart(el) {
     const { token } = user;
 
     const config = {
@@ -56,13 +56,13 @@ export default function Products() {
 
     if (user) {
 
-        // const promise = axios.post(`http://localhost:5000/carrinho`,id,config);
+        const promise = axios.post(`http://localhost:5000/carrinho`,el,config);
 
-      const promise = axios.post(
-        `https://ambitious-api.herokuapp.com/carrinho`,
-        id,
-        config
-      );
+    //   const promise = axios.post(
+    //     `https://ambitious-api.herokuapp.com/carrinho`,
+    //     id,
+    //     config
+    //   );
 
       promise
         .then((res) => {
@@ -89,7 +89,7 @@ export default function Products() {
               <div>
                 <Rating readonly size={30} ratingValue={el.rate} />
                 <span>R${el.price}.00</span>
-                <button onClick={() => addToCart(el._id)}>Comprar</button>
+                <button onClick={() => addToCart(el)}>Comprar</button>
               </div>
             </Item>
           );
