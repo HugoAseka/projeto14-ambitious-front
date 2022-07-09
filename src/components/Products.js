@@ -34,8 +34,8 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/cursos`);
-    // const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
+   // const promise = axios.get(`http://localhost:5000/cursos`);
+     const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
     promise
       .then((res) => {
         setCourses([]);
@@ -45,7 +45,7 @@ export default function Products() {
       .catch((error) => console.log("deu ruim", error));
   }, []);
 
-  function addToCart(el) {
+  function addToCart(course) {
     const { token } = user;
 
     const config = {
@@ -56,11 +56,11 @@ export default function Products() {
 
     if (user) {
 
-        const promise = axios.post(`http://localhost:5000/carrinho`,el,config);
+        const promise = axios.post(`http://localhost:5000/carrinho`,course,config);
 
     //   const promise = axios.post(
     //     `https://ambitious-api.herokuapp.com/carrinho`,
-    //     id,
+    //     course,
     //     config
     //   );
 
