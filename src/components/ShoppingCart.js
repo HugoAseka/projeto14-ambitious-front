@@ -28,8 +28,8 @@ export default function ShoppingCart() {
         Authorization: `Bearer ${token}`,
       },
     };
-    // const promise = axios.get(`https://ambitious-api.herokuapp.com/carrinho`,config);
-    const promise = axios.get(`http://localhost:5000/carrinho`, config);
+    const promise = axios.get(`https://ambitious-api.herokuapp.com/carrinho`,config);
+    // const promise = axios.get(`http://localhost:5000/carrinho`, config);
     promise
       .then((res) => {
         console.log(res.data);
