@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { React, useEffect, useState} from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
-import dotenv from 'dotenv';
-
+import dotenv from "dotenv";
 
 export default function ShoppingCart() {
   dotenv.config();
@@ -21,7 +20,6 @@ export default function ShoppingCart() {
     },
   ]);
 
-
   useEffect(() => {
     const { token } = user;
 
@@ -30,18 +28,16 @@ export default function ShoppingCart() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const promise = axios.get(`${process.env.API}/carrinho`,config);
-    
+    // const promise = axios.get(`https://ambitious-api.herokuapp.com/carrinho`,config);
+    const promise = axios.get(`http://localhost:5000/carrinho`, config);
     promise
       .then((res) => {
         console.log(res.data);
         setCourses([]);
         setCourses([...res.data]);
-        
       })
       .catch((error) => console.log("deu ruim", error));
   }, []);
-
 
   let total = 0;
   calcTotal();

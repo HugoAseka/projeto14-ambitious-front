@@ -30,12 +30,12 @@ export default function Products() {
       description: "Best damn python course there is",
       rate: 40,
       price: 30,
-    }
+    },
   ]);
 
   useEffect(() => {
-    const promise = axios.get(`${process.env.API}/cursos`);
-
+    const promise = axios.get(`http://localhost:5000/cursos`);
+    // const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
     promise
       .then((res) => {
         setCourses([]);
@@ -55,7 +55,14 @@ export default function Products() {
     };
 
     if (user) {
-      const promise = axios.post(`${process.env.API}/carrinho`,id,config);
+        
+        const promise = axios.post(`http://localhost:5000/carrinho`,id,config);
+
+    //   const promise = axios.post(
+    //     `https://ambitious-api.herokuapp.com/carrinho`,
+    //     id,
+    //     config
+    //   );
 
       promise
         .then((res) => {
@@ -82,7 +89,7 @@ export default function Products() {
               <div>
                 <Rating readonly size={30} ratingValue={el.rate} />
                 <span>R${el.price}.00</span>
-                <button onClick={() => addToCart(el)}>Comprar</button>
+                <button onClick={() => addToCart(el._id)}>Comprar</button>
               </div>
             </Item>
           );

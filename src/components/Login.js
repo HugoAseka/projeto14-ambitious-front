@@ -5,11 +5,10 @@ import { React, useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function LoginScreen(){
-    dotenv.config();
-    const [email, setEmail]=useState("");
-    const [password,setPassword]=useState("");
-    const [isLoading, setIsLoading] = useState(false);
+export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,9 +22,9 @@ export default function LoginScreen(){
       password,
     };
 
-        const promise=axios.post(`${process.env.API}/login`,postLogin);
+    // const promise=axios.post(`https://ambitious-api.herokuapp.com/login`,postLogin);
 
-    // const promise = axios.post("http://localhost:5000/login", postLogin);
+    const promise = axios.post("http://localhost:5000/login", postLogin);
 
     promise.then((resposta) => {
       setEmail("");
