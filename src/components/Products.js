@@ -166,7 +166,7 @@ const Item = styled.div`
   padding: 20px 0;
   gap: 18px;
   img {
-    margin-right: 20px;
+    margin-right: 20px; 
     max-width: 412px;
     max-height: 220px;
     border-radius: 4px;
@@ -184,8 +184,10 @@ const Item = styled.div`
     background-color: #ff9900;
     border: none;
     border-radius: 4px;
-    width: 80px;
-    height: 30px;
+    width: 100px;
+    height: 40px;
+    font-weight:600;
+    font-size: 20px;
   }
   span{
     font-size: 24px;
