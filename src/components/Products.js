@@ -45,7 +45,7 @@ export default function Products() {
       .catch((error) => console.log("deu ruim", error));
   }, []);
 
-  function addToCart(id) {
+  function addToCart(course) {
     const { token } = user;
 
     const config = {
@@ -60,7 +60,7 @@ export default function Products() {
 
       const promise = axios.post(
         `https://ambitious-api.herokuapp.com/carrinho`,
-        id,
+        course,
         config
       );
 
@@ -89,7 +89,7 @@ export default function Products() {
               <div>
                 <Rating readonly size={30} ratingValue={el.rate} />
                 <span>R${el.price}.00</span>
-                <button onClick={() => addToCart(el._id)}>Comprar</button>
+                <button onClick={() => addToCart(el)}>Comprar</button>
               </div>
             </Item>
           );
