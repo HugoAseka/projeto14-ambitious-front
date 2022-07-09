@@ -34,8 +34,8 @@ export default function Products() {
   ]);
 
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/cursos`);
-    // const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
+   // const promise = axios.get(`http://localhost:5000/cursos`);
+     const promise=axios.get(`https://ambitious-api.herokuapp.com/cursos`);
     promise
       .then((res) => {
         setCourses([]);
