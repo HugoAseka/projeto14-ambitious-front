@@ -53,7 +53,7 @@ export default function ShoppingCart() {
 
   return (
     <Container>
-      <Header>Meu Carrinho</Header>
+      <Header>Ambitious</Header>
       <Register>
         {courses.length > 0 ? (
           <>
