@@ -47,7 +47,8 @@ export default function ShoppingCart() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const promise = axios.get(`https://ambitious-api.herokuapp.com/checkout`,null,config);
+    const promise = axios.post(`https://ambitious-api.herokuapp.com/checkout`,null,config);
+
     // const promise = axios.post(`http://localhost:5000/checkout`,null, config);
 
     promise
