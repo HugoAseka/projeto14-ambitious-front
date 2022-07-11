@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import dotenv from "dotenv";
+import UserContext from "../context/UserContext";
 
 export default function ShoppingCart() {
   dotenv.config();
@@ -10,6 +11,7 @@ export default function ShoppingCart() {
   const [display, setDisplay] = useState(false);
   const [checkoutScreen, setCheckoutScreen] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const { setUser } = useContext(UserContext);
 
   const [courses, setCourses] = useState([
     {
@@ -54,6 +56,17 @@ export default function ShoppingCart() {
     promise
       .then((res) => {
         console.log(res.data);
+        setUser({
+          name: res.data.name,
+          token: res.data.token,
+          cart: res.data.cart,
+          owned: res.data.owned,
+        });
+         //armazenando resposta.data no localStorage
+        const userString = JSON.stringify(res.data);
+        localStorage.removeItem("user");
+        localStorage.setItem("user", userString);
+
         navigate("/");
       })
       .catch((error) => console.log("checkout erro", error));

@@ -87,7 +87,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 100px;
-  background-color: #fafafa;
+  background-color: #FFEFD5;
   font-family: "Raleway";
 
   a {

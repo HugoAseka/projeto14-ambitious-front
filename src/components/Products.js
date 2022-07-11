@@ -97,12 +97,31 @@ export default function Products() {
       </Shelf>
       <SideBar display={display}>
         {user ? (
-          <h3>{user.name}</h3>
+          <Container>
+          <Item>
+            <h3>{user.name}</h3>
+          </Item>
+          <Item>
+            <button onClick={() => navigate("/login")}>Sair/Novo Login</button>
+          </Item>
+          <Item>
+            <button>Meus Cursos:</button>
+          </Item>
+          <MeusCursos>
+          {user.owned.map((el, index) => {
+            return(
+            <div key={index}>
+              {el.name}
+            </div>
+            )
+          })}
+          </MeusCursos>
+         </Container>
         ) : (
-          <div>
-            <p onClick={() => navigate("/cadastro")}>Cadastrar</p>
-            <p onClick={() => navigate("/login")}>Login</p>
-          </div>
+          <Item>
+            <button onClick={() => navigate("/cadastro")}>Cadastrar</button>
+            <button onClick={() => navigate("/login")}>Login</button>
+          </Item>
         )}
       </SideBar>
       <Menu>
@@ -119,7 +138,25 @@ export default function Products() {
     </Container>
   );
 }
-
+const MeusCursos = styled.div`
+  background-color: #fafafa;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding:10px;
+  max-height:50%;
+  overflow-y: scroll;
+  scrollbar-color: black;
+  z-index: 2;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  div {
+    font-family: "Ubuntu Mono";
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+`;
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -217,7 +254,7 @@ const Menu = styled.footer`
 `;
 
 const SideBar = styled.div`
-  background-color: lightblue;
+  background-color: #708090;
   position: fixed;
   right: 0;
   top: 0vh;
@@ -226,7 +263,7 @@ const SideBar = styled.div`
   z-index: 2;
   border-radius: 10px 0 0 10px;
   display: ${({ display }) => (display ? "flex" : "none")};
-  padding: 6%;
+  padding: 15px;
 
   h3 {
     color: white;

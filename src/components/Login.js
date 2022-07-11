@@ -49,7 +49,7 @@ export default function LoginScreen() {
     <Container>
       <Logo>Ambitious</Logo>
       {isLoading ? (
-        <Form background={"#f2f2f2"} color={"#afafaf"}>
+        <Form background={"#fafafa"} color={"#afafaf"}>
           <input
             disabled
             type="email"
@@ -73,7 +73,7 @@ export default function LoginScreen() {
           </button>
         </Form>
       ) : (
-        <Form background={"#ffffff"} color={"#000000"} onSubmit={Login}>
+        <Form background={"#fafafa"} color={"#000000"} onSubmit={Login}>
           <input
             type="email"
             id="email"
@@ -112,7 +112,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 100px;
-  background-color: #fafafa;
+  background-color: #FFEFD5;
   font-family: "Raleway";
 
   a {
