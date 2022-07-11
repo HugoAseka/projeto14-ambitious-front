@@ -116,6 +116,9 @@ export default function Products() {
             )
           })}
           </MeusCursos>
+          <Item>
+            <button onClick={() => setDisplay(!display)}>Voltar</button>
+          </Item>
          </Container>
         ) : (
           <Item>
@@ -145,7 +148,7 @@ const MeusCursos = styled.div`
   align-items: center;
   flex-direction: column;
   padding:10px;
-  max-height:50%;
+  max-height:35%;
   overflow-y: scroll;
   scrollbar-color: black;
   z-index: 2;
