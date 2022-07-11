@@ -82,7 +82,7 @@ export default function ShoppingCart() {
 
   return (
     <Container>
-      <Header>Ambitious</Header>
+      <Header onClick={() => navigate("/")}>Ambitious</Header>
       <Register>
         {courses.length > 0 ? (
           <>
